@@ -1,0 +1,38 @@
+-- phpMyAdmin SQL Dump
+-- version 3.2.0.1
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Nov 26, 2019 at 09:03 PM
+-- Server version: 5.1.36
+-- PHP Version: 5.3.0
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
+--
+-- Database: `userstatusdb`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users_tbl`
+--
+
+CREATE TABLE IF NOT EXISTS `users_tbl` (
+  `email_id` varchar(64) NOT NULL,
+  `first_name` varchar(64) NOT NULL,
+  `last_name` varchar(64) NOT NULL,
+  `password` varchar(64) NOT NULL,
+  `phone` bigint(20) NOT NULL,
+  `session_hash` varchar(128) NOT NULL,
+  PRIMARY KEY (`email_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users_tbl`
+--
+
+INSERT INTO `users_tbl` (`email_id`, `first_name`, `last_name`, `password`, `phone`, `session_hash`) VALUES
+('Company Inc', 'Highway 37', 'Highway 37', 'Highway 37', 8098988909, 'hdfjkhfg7897dfgmh'),
+('lobo@gmail.com', 'Highway 37', 'Highway 37', 'Highway 37', 8098988909, 'hdfjkhfg7897dfgmh');
