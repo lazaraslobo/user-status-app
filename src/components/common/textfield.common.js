@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 
 export const textFieldOptions = {
     marginNormal_variantOutlined_FW : {
-        margin      : "normal",
+        margin      : "dense",
         fullWidth   : true,
         variant     : "outlined"
     }

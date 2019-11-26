@@ -20,7 +20,8 @@ class SignUp extends React.Component{
             userPassword    :   "",
             firstName       :   "",
             lastName        :   "",
-            age             :   ""
+            age             :   "",
+            phone           :   ""
         }
     }
 
@@ -76,8 +77,15 @@ class SignUp extends React.Component{
                                 />
                                 <TextField
                                     required
+                                    id="userPhone"
+                                    label="Phone"
+                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
+                                    onChange={ev=> this.setState({...this.state, ...{'phone' : ev.target.value}})}
+                                />
+                                <TextField
+                                    required
                                     id="userPassword"
-                                    label="password"
+                                    label="Password"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'userPassword' : ev.target.value}})}
 

@@ -54,7 +54,7 @@ class HomeModule extends React.Component{
                                 <TextField
                                     required
                                     id="outlined-required"
-                                    label="password"
+                                    label="Password"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onKeyUp={(ev)=> handleInputs(ev, 'userPassword')}
 
