@@ -1,4 +1,5 @@
-const express = require('express')
+const express = require('express');
+const mySqlCon = require("./mysql.connect");
 const app = express()
 
 app.get('/', function (req, res) {
