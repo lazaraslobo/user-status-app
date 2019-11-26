@@ -1,0 +1,17 @@
+i{
+    cursor: pointer;
+}
+
+.generic-conainer{
+    background: #e5e5e542;
+    padding-bottom: 50px;   
+}
+
+.common-header{
+    background-color: blue;
+    color: white;
+}
+
+button{
+    margin-top: 10px !important;
+}
