@@ -8,8 +8,8 @@ const apiMethod = {
 }
 
 const getHeaders = () =>{
-    const headers = {
-        'Content-Type'  :   'application/x-www-form-urlencoded' 
+    return {
+        'Content-Type'  :   'application/x-www-form-urlencoded'
     }
 }
 
