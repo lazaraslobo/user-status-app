@@ -7,6 +7,7 @@ const headerComp = (headerProps) =>{
         <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="common-header">
             <Grid item {...GridOptions.contRowCenterCenter} xs={9}>
                 <h2>{headerProps.title}</h2>
+                <h1>HERE {console.log("ENV ", process.env)}</h1>
             </Grid>
             <Grid item {...GridOptions.contRowCenterCenter} xs={1}>
                 {headerProps.children}
