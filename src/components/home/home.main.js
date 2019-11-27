@@ -22,11 +22,14 @@ class HomeModule extends React.Component{
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10}>
                     <Header title="Status Summary">
                         <Grid {...GridOptions.contRowCenterCenter} item xs={12} >
-                            <Grid item xs={4}>
+                            <Grid item xs={2}>
                                 <i>Logout</i>
                             </Grid>
-                            <Grid item xs={5}>
+                            <Grid item xs={2}>
                                 <i>Edit Profile</i>
+                            </Grid>
+                            <Grid item xs={2}>
+                                <i>View Status</i>
                             </Grid>
                         </Grid>
                     </Header>
