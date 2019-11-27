@@ -35,10 +35,10 @@ app.post(base_url+'/validateUser', async (req, res) => {
         console.log("resp ", result);
         let resp = JSON.stringify(result);
         resp     = JSON.parse(resp);
+        if(!resp.length){
+            return res.send({data : {isValidUser : false, msg : messages[2]}});
+        }
         delete resp[0].password;
-        // if(!resp.length){
-        //     return res.send({data : {isValidUser : false}});
-        // }
 
         return res.send({data : {isValidUser : true, ...resp[0]}});
 
