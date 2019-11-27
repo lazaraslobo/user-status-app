@@ -1,6 +1,6 @@
 import React from 'react';
 import Grid from '../common/grid.common';
-import GridOptions from './maps/grid-layout.map';
+import GridOptions from '../common/maps/grid-layout.map';
 
 const headerComp = (headerProps) =>{
     return(

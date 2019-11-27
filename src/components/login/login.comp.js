@@ -4,7 +4,7 @@ import {HOME_STATE} from '../core/redux/state-name.map';
 import {LOGIN_SUCCESS, HOME_SIGN_OUT} from '../core/redux/actions.map'
 
 import Grid from '../common/grid.common';
-import GridOptions from '../maps/grid-layout.map';
+import GridOptions from '../common/maps/grid-layout.map';
 
 import Button,{buttonOptions} from '../common/button.common';
 import TextField, {textFieldOptions} from '../common/textfield.common';

@@ -4,7 +4,7 @@ import {HOME_STATE} from '../core/redux/state-name.map';
 import {HOME_SIGN_OUT} from '../core/redux/actions.map'
 
 import Grid from '../common/grid.common';
-import GridOptions from '../maps/grid-layout.map';
+import GridOptions from '../common/maps/grid-layout.map';
 
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';

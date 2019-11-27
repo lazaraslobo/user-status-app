@@ -37,8 +37,8 @@ class SignUp extends React.Component{
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10} className="generic-conainer">
                     <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="common-header">
-                        <Header title="Lets create new account">
-                            <i onClick={()=>this.props.history.push("/login")}>Sign-in </i>
+                        <Header title="Update Status">
+                            <i onClick={()=>this.props.history.push("/login")}>Sign-out</i>
                         </Header>
                     </Grid>
                     
@@ -47,46 +47,16 @@ class SignUp extends React.Component{
                             <form onSubmit={(event)=>createNewAccount(event)}>
                                 <TextField
                                     required
-                                    id="firstName"
-                                    label="First Name"
-                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
-                                    onChange={ev=> this.setState({...this.state, ...{'firstName' : ev.target.value}})}
-                                    value={this.state.firstName}
-                                />
-                                <TextField
-                                    required
-                                    id="lastName"
-                                    label="Last Name"
-                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
-                                    onChange={ev=> this.setState({...this.state, ...{'lastName' : ev.target.value}})}
-
-                                />
-                                <TextField
-                                    required
-                                    id="age"
-                                    label="Age"
-                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
-                                    onChange={ev=> this.setState({...this.state, ...{'age' : ev.target.value}})}
-
-                                />
-                                <TextField
-                                    required
                                     id="userEmail"
+                                    readonly
                                     label="Email"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'userEmail' : ev.target.value}})}
                                 />
                                 <TextField
                                     required
-                                    id="userPhone"
-                                    label="Phone"
-                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
-                                    onChange={ev=> this.setState({...this.state, ...{'phone' : ev.target.value}})}
-                                />
-                                <TextField
-                                    required
                                     id="userPassword"
-                                    label="Password"
+                                    label="Summary"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'userPassword' : ev.target.value}})}
 
