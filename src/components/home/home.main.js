@@ -11,16 +11,23 @@ import Header from '../common/header.common';
 
 class HomeModule extends React.Component{
     render(){
-        if(!this.props.HOME_STATE.isUserLoggedIn){
-            this.props.history.push("/login");
-            return false;
-        }
+        // if(!this.props.HOME_STATE.isUserLoggedIn){
+        //     this.props.history.push("/login");
+        //     return false;
+        // }
 
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10}>
                     <Header title="Welcome">
-                        <i>Logout</i>
+                        <Grid {...GridOptions.contRowCenterCenter} item xs={12} >
+                            <Grid item xs={4}>
+                                <i>Logout</i>
+                            </Grid>
+                            <Grid item xs={5}>
+                                <i>Edit Profile</i>
+                            </Grid>
+                        </Grid>
                     </Header>
                 </Grid>
             </Grid>
