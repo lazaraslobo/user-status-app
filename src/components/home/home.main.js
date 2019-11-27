@@ -18,12 +18,7 @@ class HomeModule extends React.Component{
         console.log("is valid hash ", isValidHash);
     }
 
-    render(){
-        // if(!this.props.HOME_STATE.isUserLoggedIn){
-        //     this.props.history.push("/login");
-        //     return false;
-        // }
-        
+    render(){        
         const goToRoute = (routeName) =>{
             this.props.history.push(routeName);
             return;
