@@ -30,11 +30,16 @@ const removeKeyStorage = (key) =>{
     }
 } 
 
+const cleanAll = () =>{
+    return setLocalStorageData({});
+}
+
 export {
     setLocalStorageData,
     getLocalStorage,
     storageName,
     resetLocalStorage,
     removeKeyStorage,
-    setStorageKeyData
+    setStorageKeyData,
+    cleanAll
 };

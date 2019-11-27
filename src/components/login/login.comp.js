@@ -12,6 +12,8 @@ import TextField, {textFieldOptions} from '../common/textfield.common';
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
 
+import {setLocalStorageData, cleanAll} from '../utilities/local-storage.util';
+
 class HomeModule extends React.Component{
     constructor(){
         super();
@@ -24,7 +26,13 @@ class HomeModule extends React.Component{
     render(){
         const userWantsToLogin = (event) =>{
             event.preventDefault();
-            fetchData(1, 1, this.state);
+            fetchData(1, 1, this.state).then(result =>{
+                if(result.data.isValidUser){
+                    setLocalStorageData(result.data);
+                }else{
+                    cleanAll();
+                }
+            });
         }
 
         const handleInputs = (ev, inpID)=>{
