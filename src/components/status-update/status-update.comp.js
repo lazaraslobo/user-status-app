@@ -17,7 +17,7 @@ class SignUp extends React.Component{
     constructor(){
         super();
         this.state = {
-            userEmail       :   "lobo@gmail.com",
+            userEmail       :   "",
             userSummary     :   "",
             summaryDate     :   ""
         }
@@ -40,6 +40,7 @@ class SignUp extends React.Component{
                             required
                             disabled={true}
                             label="Email"
+                            value={this.props.HOME_STATE.userDetails.email_id}
                             {...textFieldOptions.marginNormal_variantOutlined_FW}
                         />
                         <DatePicker

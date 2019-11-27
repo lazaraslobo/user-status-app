@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {HOME_STATE} from '../core/redux/state-name.map';
-import {LOGIN_SUCCESS, HOME_SIGN_OUT} from '../core/redux/actions.map'
+import {LOGIN_SUCCESS, HOME_SIGN_OUT, UPDATE_USER_DETAILS} from '../core/redux/actions.map'
 
 import Grid from '../common/grid.common';
 import GridOptions from '../common/maps/grid-layout.map';
@@ -33,6 +33,8 @@ class HomeModule extends React.Component{
             fetchData(1, 1, this.state).then(result =>{
                 if(result.data.isValidUser){
                     setLocalStorageData(result.data);
+                    this.props.updateUserDetails(result.data);
+                    console.log(this.props.HOME_STATE);
                     this.props.history.push("/");
                     return;
                 }else{
@@ -93,7 +95,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     signOut    : () =>  dispatch({type : HOME_SIGN_OUT, data : {isUserLoggedIn : false}}),
     signIn    : () =>  dispatch({type : LOGIN_SUCCESS, data : {isUserLoggedIn : true}}),
-
+    updateUserDetails : (userData) => dispatch({type : UPDATE_USER_DETAILS, data : userData})
 })
 
 export default connect(
