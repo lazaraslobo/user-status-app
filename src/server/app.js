@@ -48,7 +48,7 @@ app.post(base_url+'/validateUser', async (req, res) => {
     await mySqlCon.query(sql, async function (err, result, fields) {
         if (err) throw new Error(err);
         console.log("resp ", result);
-        resp     = stringJson(resp);
+        let resp     = stringJson(result);
         if(!resp.length){
             return res.send({data : {isValidUser : false, msg : messages[2]}});
         }

@@ -23,12 +23,18 @@ class HomeModule extends React.Component{
         }
     }
 
+    componentWillMount(){
+        cleanAll();
+    }
+
     render(){
         const userWantsToLogin = (event) =>{
             event.preventDefault();
             fetchData(1, 1, this.state).then(result =>{
                 if(result.data.isValidUser){
                     setLocalStorageData(result.data);
+                    this.props.history.push("/");
+                    return;
                 }else{
                     cleanAll();
                 }
