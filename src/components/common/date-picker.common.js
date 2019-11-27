@@ -21,8 +21,7 @@ const DatePicker = (dateProps) =>{
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <KeyboardDatePicker
                 margin="dense"
-                id="date-picker-dialog"
-                label="Date picker dialog"
+                label="Summary Date"
                 format="yyyy-MM-dd"
                 KeyboardButtonProps={{
                     'aria-label': 'change date',
