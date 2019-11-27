@@ -27,8 +27,22 @@ app.post(base_url+'/', async function (req, res) {
   res.send('hello world')
 });
 
-app.post(base_url+'/validateUser', async function (req, res) {
-    res.send({data : req.body});
+app.post(base_url+'/validateUser', async (req, res) => {
+    console.log("body ", req.body);
+    let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.userEmail+"' AND `password` = '"+req.body.userPassword+"'";
+    await mySqlCon.query(sql, async function (err, result, fields) {
+        if (err) throw new Error(err);
+        console.log("resp ", result);
+        let resp = JSON.stringify(result);
+        resp     = JSON.parse(resp);
+        delete resp[0].password;
+        // if(!resp.length){
+        //     return res.send({data : {isValidUser : false}});
+        // }
+
+        return res.send({data : {isValidUser : true, ...resp[0]}});
+
+    });
 });
 
 app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{

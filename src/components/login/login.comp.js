@@ -24,7 +24,7 @@ class HomeModule extends React.Component{
     render(){
         const userWantsToLogin = (event) =>{
             event.preventDefault();
-            fetchData(1, 1, {demo : "hi"});
+            fetchData(1, 1, this.state);
         }
 
         const handleInputs = (ev, inpID)=>{
