@@ -15,6 +15,18 @@ class ViewStatusComponent extends React.Component{
         //     this.props.history.push("/login");
         //     return false;
         // }
+        const arr= [{date : "22-23-44", summary : "i worked on boot strap"},
+        {date : "2-23-4", summary : "i worked on material"},
+        {date : "23-10-1995", summary : "i worked on js"}]
+        const createTableData = () =>{
+            return arr.map((value, index)=>
+                <tr key={index}>
+                    <td>{index+1}</td>
+                    <td>{value.date}</td>
+                    <td>{value.summary}</td>
+                </tr>
+            )
+        }
 
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
@@ -39,11 +51,7 @@ class ViewStatusComponent extends React.Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2019-11-07</td>
-                                    <td>Worked on boot strap</td>
-                                </tr>
+                                {createTableData()}
                             </tbody>
                         </table>
                     </Grid>
