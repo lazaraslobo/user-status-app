@@ -13,6 +13,7 @@ import TextField, {textFieldOptions} from '../common/textfield.common';
 
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
+import {getLocalStorage} from '../utilities/local-storage.util';
 
 class SignUp extends React.Component{
     constructor(){
@@ -30,20 +31,28 @@ class SignUp extends React.Component{
     componentWillMount(){
         let isValidHash = checkSession(this.props);
         console.log("is valid hash ", this.props.HOME_STATE);
-        let userObj = {
-            userEmail       :  this.props.HOME_STATE.userDetails.email_id,
-            firstName       :  this.props.HOME_STATE.userDetails.first_name,
-            lastName        :  this.props.HOME_STATE.userDetails.last_name,
-            phone           :  this.props.HOME_STATE.userDetails.phone,
-            session_hash    :  this.props.HOME_STATE.userDetails.session_hash,
+        let obj = {
+            email_id        :   getLocalStorage().email_id,
+            session_hash    :   getLocalStorage().session_hash,
+
         }
+        fetchData(6, 1, obj).then(result =>{
+            let userObj = {
+                userEmail       :  result.data.email_id,
+                firstName       :  result.data.first_name,
+                lastName        :  result.data.last_name,
+                phone           :  result.data.phone,
+                session_hash    :   getLocalStorage().session_hash
+            }
+            this.setState({...this.state, ...userObj});
+        });
 
-        this.setState({
-            ...this.state, 
-            ...userObj
-        })
+        // this.setState({
+        //     ...this.state, 
+        //     ...userObj
+        // })
 
-        console.log("here ", userObj);
+        // console.log("here ", userObj);
     }
 
     render(){
@@ -51,7 +60,7 @@ class SignUp extends React.Component{
             event.preventDefault();
             console.log("state is ", this.state);
             fetchData(3, 1, this.state).then(result =>{
-                
+
             });
         }
 
