@@ -3,10 +3,10 @@ require('dotenv').config();
 const to = require('await-to-js').default;
 const mySqlCon = require("./mysql.connect");
 const express = require('express');
-var bodyParser = require('body-parser');
+let bodyParser = require('body-parser');
 const messages = require("./messages.map");
 // const executeSql = require("./queries-utilities/execute.query");
-var md5 = require('md5');
+let md5 = require('md5');
 
 const app = express()
 app.use(bodyParser.json()); 
@@ -28,12 +28,9 @@ app.post(base_url+'/validateUser', async function (req, res) {
     res.send({data : req.body});
 });
 
-
 app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
-    console.log("body ", req.body);
-    
-    
-    var sql = "SELECT `email_id` FROM `users_tbl` WHERE `email_id` = '"+req.body.userEmail+"'";
+    // console.log("body ", req.body);
+    let sql = "SELECT `email_id` FROM `users_tbl` WHERE `email_id` = '"+req.body.userEmail+"'";
     await mySqlCon.query(sql, async function (err, result, fields) {
         if (err) throw new Error(err);
         let emailIdResp = JSON.stringify(result);
@@ -41,26 +38,23 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
         if(emailIdResp.length){
             return res.send({data : {msg : messages[1]}, status : "success"});
         }else{
-            var sql = `INSERT INTO users_tbl (email_id,first_name,last_name,password,phone,session_hash) 
-               VALUES ('${req.body.userEmail}', 
+            let sql = `INSERT INTO users_tbl (email_id,first_name,last_name,password,phone,session_hash) VALUES (
+                        '${req.body.userEmail}', 
                         '${req.body.firstName}', 
                         '${req.body.lastName}', 
                         '${req.body.userPassword}', 
                         '${req.body.phone}', 
-                        '${md5(req.body.userEmail+req.body.firstName)}')
-                `;
-               await mySqlCon.query(sql, async function (err, result, fields) {
-                   if(err) throw err;
-                   console.log("result ", result);
-                   return res.send({data : {msg : "User Created Successfully!", status : "success"}})
-               })
+                        '${md5(req.body.userEmail+req.body.firstName)}'
+                )`;
+
+            await mySqlCon.query(sql, async function (err, result, fields) {
+                if(err) throw err;
+                console.log("user creation resp =>  ", result);
+                return res.send({data : {msg : "User Created Successfully!", status : "success"}})
+            })
         }
 
     });
-    // let resp = await executeSql(mySqlCon, sql);
-    // console.log("resp ", resp);
-    // let isEmailExists = await executeSql(mySqlCon, sql)[0] ? true : false;
-    // res.send({data : {status : "success", is : isEmailExists}});
 }));
 
 app.post(base_url+'/updateUser', async function (req, res) {
