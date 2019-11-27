@@ -7,7 +7,13 @@ const goToRoute = (supParentProps, route) =>{
 
 const checkSession = (parentProps) =>{
     let localData = getLocalStorage();
-    let localSessionHash = localData && localData.session_hash ? localData.session_hash : false; 
+    let localSessionHash = localData 
+    ?
+        {
+            email_id     :   localData.userDetails ? localData.userDetails.email ? localData.userDetails.email : undefined : undefined,
+            session_hash :   localData.session_hash ? localData.session_hash : undefined
+        }
+    :  false; 
 
     if(!localSessionHash){
         goToRoute(parentProps, '/login');

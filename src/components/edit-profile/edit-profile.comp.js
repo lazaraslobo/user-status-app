@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import checkSession from '../helpers/route.protect';
+
 import {HOME_STATE} from '../core/redux/state-name.map';
 import {LOGIN_SUCCESS, HOME_SIGN_OUT} from '../core/redux/actions.map'
 
@@ -27,6 +29,9 @@ class SignUp extends React.Component{
     
     
     componentWillMount(){
+        let isValidHash = checkSession(this.props);
+        console.log("is valid hash ", isValidHash);
+
         this.setState({
             ...this.state, 
             ...this.props.userDetails

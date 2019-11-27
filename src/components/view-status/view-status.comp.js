@@ -1,5 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import checkSession from '../helpers/route.protect';
+
 import {HOME_STATE} from '../core/redux/state-name.map';
 import {HOME_SIGN_OUT} from '../core/redux/actions.map'
 
@@ -10,6 +12,11 @@ import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
 
 class ViewStatusComponent extends React.Component{
+    componentWillMount(){
+        let isValidHash = checkSession(this.props);
+        console.log("is valid hash ", isValidHash);
+    }
+
     render(){
         // if(!this.props.HOME_STATE.isUserLoggedIn){
         //     this.props.history.push("/login");
