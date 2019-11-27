@@ -7,27 +7,26 @@ const goToRoute = (supParentProps, route) =>{
 
 const checkSession = (parentProps) =>{
     let localData = getLocalStorage();
-    let localSessionHash = localData 
-    ?
-        {
-            email_id     :   localData.userDetails ? localData.userDetails.email ? localData.userDetails.email : undefined : undefined,
-            session_hash :   localData.session_hash ? localData.session_hash : undefined
+    if(localData && Object.keys(localData).length){
+        let loclData = {
+            email_id     :   localData.email_id,
+            session_hash :   localData.session_hash
         }
-    :  false; 
 
-    if(!localSessionHash){
-        goToRoute(parentProps, '/login');
-        return;
-    }
-
-    let res = {isValidHash : false};//fetchData(4, 1, {session_hash : localSessionHash});
-    if(res.isValidHash){
-        return{
-            isValidHash     :       true
-        }
+        fetchData(5, 1, loclData).then(result =>{
+            console.log(result)
+            if(result.data.isValidHash){
+                return{
+                    isValidHash     :       true
+                }
+            }else{
+                goToRoute(parentProps, '/login');
+                return false;
+            }
+        });
     }else{
         goToRoute(parentProps, '/login');
-        return false;
+        return;
     }
 }
 

@@ -5,7 +5,7 @@ const mySqlCon = require("./mysql.connect");
 const express = require('express');
 let bodyParser = require('body-parser');
 const messages = require("./messages.map");
-// const executeSql = require("./queries-utilities/execute.query");
+const stringJson = require("./json.parser").stringJson
 let md5 = require('md5');
 
 const app = express();
@@ -27,14 +27,28 @@ app.post(base_url+'/', async function (req, res) {
   res.send('hello world')
 });
 
+app.post(base_url+'/verifyHash', async (req, res) => {
+    console.log(req.body);
+//     email_id: 'lobo@lobo.com',
+//   session_hash: '03549dd9aa94a178cae94b2cd3b5fd1c'
+    let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.email_id+"' AND `session_hash` = '"+req.body.session_hash+"'";
+    await mySqlCon.query(sql, async function (err, result, fields) {
+        if (err) throw new Error(err);
+        if(stringJson(result).length){
+            return res.send({data : {isValidHash : true}, status : "success"})
+        }else{
+            return res.send({data : {isValidHash : false}, status : "success"})
+        }
+    });
+});
+
 app.post(base_url+'/validateUser', async (req, res) => {
     console.log("body ", req.body);
     let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.userEmail+"' AND `password` = '"+req.body.userPassword+"'";
     await mySqlCon.query(sql, async function (err, result, fields) {
         if (err) throw new Error(err);
         console.log("resp ", result);
-        let resp = JSON.stringify(result);
-        resp     = JSON.parse(resp);
+        resp     = stringJson(resp);
         if(!resp.length){
             return res.send({data : {isValidUser : false, msg : messages[2]}});
         }
@@ -50,8 +64,7 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
     let sql = "SELECT `email_id` FROM `users_tbl` WHERE `email_id` = '"+req.body.userEmail+"'";
     await mySqlCon.query(sql, async function (err, result, fields) {
         if (err) throw new Error(err);
-        let emailIdResp = JSON.stringify(result);
-        emailIdResp     = JSON.parse(emailIdResp);
+        let emailIdResp = stringJson(result);
         if(emailIdResp.length){
             return res.send({data : {msg : messages[1]}, status : "success"});
         }else{
