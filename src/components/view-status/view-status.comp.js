@@ -33,12 +33,14 @@ class ViewStatusComponent extends React.Component{
                         <table>
                             <thead>
                                 <tr>
-                                <th>Date</th>
-                                <th>Summary Message</th>
+                                    <th>SL. No</th>
+                                    <th>Date</th>
+                                    <th>Summary Message</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
+                                    <td>1</td>
                                     <td>2019-11-07</td>
                                     <td>Worked on boot strap</td>
                                 </tr>
