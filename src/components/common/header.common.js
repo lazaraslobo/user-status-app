@@ -8,7 +8,7 @@ const headerComp = (headerProps) =>{
             <Grid item {...GridOptions.contRowStartCenter} xs={6}>
                 <h2 className="main-heading">{headerProps.title}</h2>
             </Grid>
-            <Grid item {...GridOptions.contRowCenterCenter} xs={6}>
+            <Grid item {...GridOptions.contColEndCenter} xs={6}>
                 {headerProps.children}
             </Grid>
         </Grid>

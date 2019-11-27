@@ -4,6 +4,7 @@ import LoginComponent from '../login/login.comp';
 import SignupComponent from '../signup/signup.comp';
 import StatusUpdateComponent from '../status-update/status-update.comp';
 import EditProfileComponent from '../edit-profile/edit-profile.comp';
+import ViewStatusComponent from '../view-status/view-status.comp';
 
 export default [
     {
@@ -42,10 +43,17 @@ export default [
         params          :   {}
     },
     {
+        path            :   "/view-status",
+        component       :   ViewStatusComponent,
+        exact           :   true,
+        route_id        :   "6.0",
+        params          :   {}
+    },
+    {
         path            :   "/page-not-found",
         component       :   ()=><h3>Requested Page was not found</h3>,
         exact           :   true,
-        route_id        :   "5.0",
+        route_id        :   "7.0",
         params          :   {}
     }
 ];

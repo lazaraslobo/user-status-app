@@ -29,3 +29,18 @@ div, Grid{
 .main-heading{
     margin-left: 20px;
 }
+
+table{
+    margin-top: 3em;
+    width: 100% !important;
+    text-align: center;
+    border: solid 1px grey;
+}
+
+th{
+    background-color: #ebebeb;
+}
+
+th, td{
+    padding : 10px;
+}
