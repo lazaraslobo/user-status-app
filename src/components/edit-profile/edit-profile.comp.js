@@ -18,26 +18,31 @@ class SignUp extends React.Component{
     constructor(){
         super();
         this.state = {
-            userEmail       :   "",
-            userPassword    :   "",
-            firstName       :   "",
-            lastName        :   "",
-            age             :   "",
-            phone           :   ""
+            userEmail       :  "",
+            userPassword    :  "",
+            firstName       :  "",
+            lastName        :  "",
+            phone           :  ""
         }
     }
     
     
     componentWillMount(){
         let isValidHash = checkSession(this.props);
-        console.log("is valid hash ", isValidHash);
+        console.log("is valid hash ", this.props.HOME_STATE);
+        let userObj = {
+            userEmail       :  this.props.HOME_STATE.userDetails.email_id,
+            firstName       :  this.props.HOME_STATE.userDetails.first_name,
+            lastName        :  this.props.HOME_STATE.userDetails.last_name,
+            phone           :  this.props.HOME_STATE.userDetails.phone
+        }
 
         this.setState({
             ...this.state, 
-            ...this.props.userDetails
+            ...userObj
         })
 
-        console.log("here ", this.state);
+        console.log("here ", userObj);
     }
 
     render(){
@@ -52,7 +57,14 @@ class SignUp extends React.Component{
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10} className="generic-conainer">
                     <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="common-header">
                         <Header title="Edit Profile">
-                            <i onClick={()=>this.props.history.push("/login")}>Logout</i>
+                            <Grid {...GridOptions.contRowCenterCenter} item xs={12} >
+                                <Grid item {...GridOptions.contRowCenterCenter} xs={2}>
+                                    <i onClick={()=>this.props.history.push("/login")}>Logout</i>
+                                </Grid>
+                                <Grid item {...GridOptions.contRowCenterCenter} xs={2}>
+                                    <i onClick={()=>this.props.history.push("/")}>Home</i>
+                                </Grid>
+                            </Grid>
                         </Header>
                     </Grid>
                     
@@ -73,21 +85,14 @@ class SignUp extends React.Component{
                                     label="Last Name"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'lastName' : ev.target.value}})}
-
-                                />
-                                <TextField
-                                    required
-                                    id="age"
-                                    label="Age"
-                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
-                                    onChange={ev=> this.setState({...this.state, ...{'age' : ev.target.value}})}
-
+                                    value={this.state.lastName}
                                 />
                                 <TextField
                                     required
                                     id="userEmail"
                                     label="Email"
                                     disabled
+                                    value={this.state.userEmail}
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'userEmail' : ev.target.value}})}
                                 />
@@ -95,6 +100,7 @@ class SignUp extends React.Component{
                                     required
                                     id="userPhone"
                                     label="Phone"
+                                    value={this.state.phone}
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'phone' : ev.target.value}})}
                                 />
