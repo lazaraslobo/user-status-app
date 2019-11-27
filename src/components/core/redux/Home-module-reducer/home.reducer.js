@@ -13,7 +13,8 @@ const initialState = {
         email       : undefined,
         phone       : undefined,
     },
-    statusSummary : []    
+    statusSummary   : [],
+    session_hash    : undefined    
 };
 
 /* Home Screen Data information */

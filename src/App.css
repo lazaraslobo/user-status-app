@@ -15,3 +15,12 @@ i{
 button{
     margin-top: 10px !important;
 }
+
+div, Grid{
+    animation: fadeInAnimation 0.7s;
+}
+
+@keyframes fadeInAnimation{
+    from{opacity: 0;}
+    to{opacity: 1;}
+}
