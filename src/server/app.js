@@ -28,9 +28,6 @@ app.post(base_url+'/', async function (req, res) {
 });
 
 app.post(base_url+'/verifyHash', async (req, res) => {
-    console.log(req.body);
-//     email_id: 'lobo@lobo.com',
-//   session_hash: '03549dd9aa94a178cae94b2cd3b5fd1c'
     let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.email_id+"' AND `session_hash` = '"+req.body.session_hash+"'";
     await mySqlCon.query(sql, async function (err, result, fields) {
         if (err) throw new Error(err);
@@ -43,7 +40,6 @@ app.post(base_url+'/verifyHash', async (req, res) => {
 });
 
 app.post(base_url+'/validateUser', async (req, res) => {
-    console.log("body ", req.body);
     let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.userEmail+"' AND `password` = '"+req.body.userPassword+"'";
     await mySqlCon.query(sql, async function (err, result, fields) {
         if (err) throw new Error(err);
@@ -78,7 +74,7 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
                 )`;
 
             await mySqlCon.query(sql, async function (err, result, fields) {
-                if(err) throw err;
+                if (err) throw new Error(err);
                 console.log("user creation resp =>  ", result);
                 res.status(200);
                 return res.send({data : {msg : "User Created Successfully!", status : "success"}})
@@ -89,7 +85,13 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
 }));
 
 app.post(base_url+'/updateUser', async function (req, res) {
-    res.send('hello world, i am update user');
+    let updateQuery = "UPDATE users_tbl SET `password` = '"+req.body.userPassword+"', `first_name` = '"+req.body.firstName+"', `last_name` = '"+req.body.lastName+"', `phone`='"+req.body.phone+"' WHERE `email_id` = '"+req.body.userEmail+"' AND `session_hash`='"+req.body.session_hash+"'";
+    await mySqlCon.query(updateQuery, async function (err, result, fields) {
+        if (err) throw new Error(err);
+        let response = stringJson(result);
+        console.log(response);
+        res.send({data : {msg : messages[3], ...req.body}, status : "success"});
+    });
 });
 
 const port = 8080;

@@ -34,7 +34,8 @@ class SignUp extends React.Component{
             userEmail       :  this.props.HOME_STATE.userDetails.email_id,
             firstName       :  this.props.HOME_STATE.userDetails.first_name,
             lastName        :  this.props.HOME_STATE.userDetails.last_name,
-            phone           :  this.props.HOME_STATE.userDetails.phone
+            phone           :  this.props.HOME_STATE.userDetails.phone,
+            session_hash    :  this.props.HOME_STATE.userDetails.session_hash,
         }
 
         this.setState({
@@ -49,7 +50,9 @@ class SignUp extends React.Component{
         const createNewAccount = (event) =>{
             event.preventDefault();
             console.log("state is ", this.state);
-            fetchData(2, 1, this.state);
+            fetchData(3, 1, this.state).then(result =>{
+                
+            });
         }
 
         return(
