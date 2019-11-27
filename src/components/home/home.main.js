@@ -9,26 +9,38 @@ import GridOptions from '../common/maps/grid-layout.map';
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
 import StatusUpdate from '../status-update/status-update.comp';
+import  checkSession from "../helpers/route.protect";
 
 class HomeModule extends React.Component{
+
+    componentWillMount(){
+        let isValidHash = checkSession(this.props);
+        console.log("is valid hash ", isValidHash);
+    }
+
     render(){
         // if(!this.props.HOME_STATE.isUserLoggedIn){
         //     this.props.history.push("/login");
         //     return false;
         // }
+        
+        const goToRoute = (routeName) =>{
+            this.props.history.push(routeName);
+            return;
+        }
 
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10}>
                     <Header title="Status Summary">
                         <Grid {...GridOptions.contRowCenterCenter} item xs={12} >
-                            <Grid item xs={2}>
+                            <Grid item xs={2} onClick={()=>goToRoute("/login")}>
                                 <i>Logout</i>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={2} onClick={()=>goToRoute("/edit-profile")}>
                                 <i>Edit Profile</i>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={2} onClick={()=>goToRoute("/view-status")}>
                                 <i>View Status</i>
                             </Grid>
                         </Grid>

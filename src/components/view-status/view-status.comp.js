@@ -28,15 +28,20 @@ class ViewStatusComponent extends React.Component{
             )
         }
 
+        const goToRoute = (routeName) =>{
+            this.props.history.push(routeName);
+            return;
+        }
+
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10}>
                     <Header title="Total Status">
                         <Grid {...GridOptions.contRowCenterCenter} item xs={12} >
-                            <Grid item xs={2}>
+                            <Grid item xs={2} onClick={()=>goToRoute("/login")}>
                                 <i>Logout</i>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={2} onClick={()=>goToRoute("/edit-profile")}>
                                 <i>Edit Profile</i>
                             </Grid>
                         </Grid>

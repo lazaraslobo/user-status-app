@@ -3,6 +3,8 @@ import {
     HOME_SIGN_OUT
 } from '../actions.map';
 
+import { getLocalStorage } from '../../../utilities/local-storage.util';
+
 //Component InitialState
 const initialState = {
     isUserLoggedIn  : false,
@@ -14,7 +16,7 @@ const initialState = {
         phone       : undefined,
     },
     statusSummary   : [],
-    session_hash    : undefined    
+    session_hash    : getLocalStorage() && getLocalStorage().session_hash ? getLocalStorage().session_hash : undefined     
 };
 
 /* Home Screen Data information */
