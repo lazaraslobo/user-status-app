@@ -20,8 +20,12 @@ const initialState = {
     session_hash    : getLocalStorage() && getLocalStorage().session_hash ? getLocalStorage().session_hash : undefined     
 };
 
-if(Object.keys(getLocalStorage).length){
-    initialState.userDetails = {...getLocalStorage};
+if(Object.keys(getLocalStorage()).length){
+    initialState.userDetails = {...getLocalStorage()};
+    console.log("new state", initialState)
+
+}else{
+    console.log("initial state")
 }
 
 /* Home Screen Data information */

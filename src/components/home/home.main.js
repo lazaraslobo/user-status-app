@@ -15,7 +15,7 @@ class HomeModule extends React.Component{
 
     componentWillMount(){
         let isValidHash = checkSession(this.props);
-        console.log("is valid hash ", isValidHash);
+        console.log("is valid hash ", this.props.HOME_STATE);
     }
 
     render(){        
