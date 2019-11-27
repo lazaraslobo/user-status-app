@@ -17,46 +17,44 @@ class SignUp extends React.Component{
     constructor(){
         super();
         this.state = {
-            userEmail       :   "",
-            userPassword    :   "",
-            firstName       :   "",
-            lastName        :   "",
-            age             :   "",
-            phone           :   ""
+            userEmail       :   "lobo@gmail.com",
+            userSummary     :   "",
+            summaryDate     :   ""
         }
     }
 
     
     render(){
-        const createNewAccount = (event) =>{
+
+        const updateStatus = (event) =>{
             event.preventDefault();
             console.log("state is ", this.state);
             fetchData(2, 1, this.state);
-        }
+        }  
 
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
                 <Grid item {...GridOptions.contColCenterCenter} xs={12}>
-                            <form onSubmit={(event)=>createNewAccount(event)}>
-                                <TextField
-                                    required
-                                    id="userEmail"
-                                    readOnly
-                                    label="Email"
-                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
-                                    onChange={ev=> this.setState({...this.state, ...{'userEmail' : ev.target.value}})}
-                                />
-                                <DatePicker />
-                                <TextField
-                                    required
-                                    id="userPassword"
-                                    label="Summary"
-                                    {...textFieldOptions.marginNormal_variantOutlined_FW}
-                                    onChange={ev=> this.setState({...this.state, ...{'userPassword' : ev.target.value}})}
-                                />
-                                <Button {...buttonOptions.Contained_FW_Primary} type="submit">submit</Button>
-                            </form>
-                    </Grid>
+                    <form onSubmit={(event)=>updateStatus(event)}>
+                        <TextField
+                            required
+                            disabled={true}
+                            label="Email"
+                            {...textFieldOptions.marginNormal_variantOutlined_FW}
+                        />
+                        <DatePicker
+                            required 
+                            id="date-picker"
+                        />
+                        <TextField
+                            required
+                            label="Summary"
+                            {...textFieldOptions.marginNormal_variantOutlined_FW}
+                            onChange={ev=> this.setState({...this.state, ...{'userSummary' : ev.target.value, summaryDate : document.getElementById("date-picker").value}})}
+                        />
+                        <Button {...buttonOptions.Contained_FW_Primary} type="submit">submit</Button>
+                    </form>
+                </Grid>
             </Grid>
         )
     }

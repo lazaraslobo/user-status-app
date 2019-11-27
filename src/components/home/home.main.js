@@ -20,7 +20,7 @@ class HomeModule extends React.Component{
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10}>
-                    <Header title="Welcome">
+                    <Header title="Status Summary">
                         <Grid {...GridOptions.contRowCenterCenter} item xs={12} >
                             <Grid item xs={4}>
                                 <i>Logout</i>
