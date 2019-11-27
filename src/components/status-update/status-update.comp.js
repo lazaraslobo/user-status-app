@@ -11,6 +11,7 @@ import TextField, {textFieldOptions} from '../common/textfield.common';
 
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
+import DatePicker from '../common/date-picker.common';
 
 class SignUp extends React.Component{
     constructor(){
@@ -35,15 +36,7 @@ class SignUp extends React.Component{
 
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
-                <Grid {...GridOptions.contRowCenterCenter} item xs={10} className="generic-conainer">
-                    <Grid {...GridOptions.contRowCenterCenter} item xs={12} className=" ">
-                        <Header title="Update Status">
-                            <i onClick={()=>this.props.history.push("/login")}>Sign-out</i>
-                        </Header>
-                    </Grid>
-                    
-                    <Grid item {...GridOptions.contColCenterCenter} xs={12}>
-                        <Grid item {...GridOptions.contRowCenterCenter} xs={5}>
+                <Grid item {...GridOptions.contColCenterCenter} xs={12}>
                             <form onSubmit={(event)=>createNewAccount(event)}>
                                 <TextField
                                     required
@@ -53,6 +46,7 @@ class SignUp extends React.Component{
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'userEmail' : ev.target.value}})}
                                 />
+                                <DatePicker />
                                 <TextField
                                     required
                                     id="userPassword"
@@ -62,9 +56,7 @@ class SignUp extends React.Component{
                                 />
                                 <Button {...buttonOptions.Contained_FW_Primary} type="submit">submit</Button>
                             </form>
-                        </Grid>
                     </Grid>
-                </Grid>
             </Grid>
         )
     }

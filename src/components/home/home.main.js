@@ -8,6 +8,7 @@ import GridOptions from '../common/maps/grid-layout.map';
 
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
+import StatusUpdate from '../status-update/status-update.comp';
 
 class HomeModule extends React.Component{
     render(){
@@ -29,6 +30,9 @@ class HomeModule extends React.Component{
                             </Grid>
                         </Grid>
                     </Header>
+                    <Grid {...GridOptions.contRowCenterCenter} item xs={5}>
+                        <StatusUpdate />
+                    </Grid>
                 </Grid>
             </Grid>
         )
