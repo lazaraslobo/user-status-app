@@ -8,7 +8,10 @@ const messages = require("./messages.map");
 // const executeSql = require("./queries-utilities/execute.query");
 let md5 = require('md5');
 
-const app = express()
+const app = express();
+var cors = require('cors');
+app.use(cors());
+
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true })); 
 
@@ -50,6 +53,7 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
             await mySqlCon.query(sql, async function (err, result, fields) {
                 if(err) throw err;
                 console.log("user creation resp =>  ", result);
+                res.status(200);
                 return res.send({data : {msg : "User Created Successfully!", status : "success"}})
             })
         }

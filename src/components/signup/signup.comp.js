@@ -30,7 +30,10 @@ class SignUp extends React.Component{
         const createNewAccount = (event) =>{
             event.preventDefault();
             console.log("state is ", this.state);
-            fetchData(2, 1, this.state);
+            let signUpResp_API = fetchData(2, 1, this.state).then(resp =>{
+                console.log("signUp response ", resp);
+                return resp;
+            });
         }
 
         return(
