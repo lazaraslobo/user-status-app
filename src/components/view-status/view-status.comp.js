@@ -33,26 +33,16 @@ class ViewStatusComponent extends React.Component{
                         <table>
                             <thead>
                                 <tr>
-                                <th>Month</th>
-                                <th>Savings</th>
+                                <th>Date</th>
+                                <th>Summary Message</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                <td>January</td>
-                                <td>$100</td>
-                                </tr>
-                                <tr>
-                                <td>February</td>
-                                <td>$80</td>
+                                    <td>2019-11-07</td>
+                                    <td>Worked on boot strap</td>
                                 </tr>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                <td>Sum</td>
-                                <td>$180</td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </Grid>
                 </Grid>
