@@ -36,7 +36,7 @@ class SignUp extends React.Component{
         return(
             <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="Home-Container">
                 <Grid {...GridOptions.contRowCenterCenter} item xs={10} className="generic-conainer">
-                    <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="common-header">
+                    <Grid {...GridOptions.contRowCenterCenter} item xs={12} className=" ">
                         <Header title="Update Status">
                             <i onClick={()=>this.props.history.push("/login")}>Sign-out</i>
                         </Header>
@@ -48,7 +48,7 @@ class SignUp extends React.Component{
                                 <TextField
                                     required
                                     id="userEmail"
-                                    readonly
+                                    readOnly
                                     label="Email"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'userEmail' : ev.target.value}})}
@@ -59,9 +59,8 @@ class SignUp extends React.Component{
                                     label="Summary"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onChange={ev=> this.setState({...this.state, ...{'userPassword' : ev.target.value}})}
-
                                 />
-                                <Button {...buttonOptions.Contained_FW_Primary} type="submit">Create Account</Button>
+                                <Button {...buttonOptions.Contained_FW_Primary} type="submit">submit</Button>
                             </form>
                         </Grid>
                     </Grid>
