@@ -8,5 +8,6 @@ export default {
     5       :     base_url + "/verifyHash",
     6       :     base_url + "/getUserDetails",
     7       :     base_url + "/addNewStatus",
-    8       :     base_url + "/getStatus"
+    8       :     base_url + "/getStatus",
+    9       :     base_url + "/deleteStatus"
 }

@@ -147,5 +147,25 @@ app.post(base_url+'/getStatus', async function (req, res) {
     })
 });
 
+app.post(base_url+'/deleteStatus', async function (req, res) {
+    console.log(req.body);
+    let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.email_id+"' AND `session_hash` = '"+req.body.session_hash+"'";
+    await mySqlCon.query(sql, async function (err, result, fields) {
+        if (err) throw new Error(err);
+        if(!stringJson(result).length){
+            return res.send({data : {msg : messages[2]}, status : "success"})
+        }
+        let sql = "DELETE FROM `status_tbl` WHERE `status_id` = "+req.body.status_id+" LIMIT 1";
+        await mySqlCon.query(sql, async function (err, result, fields) {
+            if (err) throw new Error(err);
+            if(stringJson(result)){
+                return res.send({data : {msg : messages[9], isDeleted : true}, status : "success"})
+            }else{
+                return res.send({data : {msg : messages[10], isDeleted : false}, status : "success"})
+            }
+        })
+    })
+});
+
 const port = 8080;
 app.listen(port, () => console.log(`App running on port http://localhost:${port}${base_url}/`));

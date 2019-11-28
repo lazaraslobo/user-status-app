@@ -6,7 +6,9 @@ const messages = {
     5       :       "Status Added",
     6       :       "Could Not Add Status, Something Went Wrong",
     7       :       "Status Found",
-    8       :       "No status found"
+    8       :       "No status found",
+    9       :       "Status deleted successfully",
+    10      :       "Could not delete status"
 };
 
 module.exports = messages;
