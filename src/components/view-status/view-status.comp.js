@@ -15,6 +15,9 @@ class ViewStatusComponent extends React.Component{
     componentWillMount(){
         let isValidHash = checkSession(this.props);
         console.log("is valid hash ", isValidHash);
+        fetchData(8, 1, this.props.HOME_STATE.userDetails).then(result =>{
+            console.log("result ", result);
+        })
     }
 
     render(){

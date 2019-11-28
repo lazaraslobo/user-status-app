@@ -85,11 +85,6 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
 }));
 
 app.post(base_url+'/updateUser', async function (req, res) {
-//     userEmail: lobo@lobo.com
-// userPassword: 123123123
-// firstName: lobo
-// lastName: lobo ok
-// phone: 8094586097
     let updateQuery = "UPDATE users_tbl SET `password` = '"+req.body.userPassword+"', `first_name` = '"+req.body.firstName+"', `last_name` = '"+req.body.lastName+"', `phone`='"+req.body.phone+"' WHERE `email_id` = '"+req.body.userEmail+"' AND `session_hash`='"+req.body.session_hash+"'";
     await mySqlCon.query(updateQuery, async function (err, result, fields) {
         if (err) throw new Error(err);
@@ -114,7 +109,44 @@ app.post(base_url+'/getUserDetails', async function (req, res) {
     });
 });
 
+app.post(base_url+'/addNewStatus', async function (req, res) {
+    let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.userEmail+"' AND `session_hash` = '"+req.body.session_hash+"'";
+    await mySqlCon.query(sql, async function (err, result, fields) {
+        if (err) throw new Error(err);
+        if(!stringJson(result).length){
+            return res.send({data : {msg : messages[2]}, status : "success"})
+        }
+        let sql = "INSERT INTO status_tbl (email_id, date, summary) VALUES ('"+req.body.userEmail+"', '"+req.body.summaryDate+"', '"+req.body.userSummary+"')";
+        await mySqlCon.query(sql, async function (err, result, fields) {
+            if (err) throw new Error(err);
+            if(stringJson(result)){
+                return res.send({data : {msg : messages[5]}, status : "success"});
+            }else{
+                return res.send({data : {msg : messages[6]}, status : "failed"});
+            }
+        });
+    });
+});
 
+app.post(base_url+'/getStatus', async function (req, res) {
+    console.log(req.body);
+    let sql = "SELECT * FROM `users_tbl` WHERE `email_id` = '"+req.body.email_id+"' AND `session_hash` = '"+req.body.session_hash+"'";
+    await mySqlCon.query(sql, async function (err, result, fields) {
+        if (err) throw new Error(err);
+        if(!stringJson(result).length){
+            return res.send({data : {msg : messages[2]}, status : "success"})
+        }
+        let sql = "SELECT * FROM `status_tbl` WHERE `email_id` = '"+req.body.email_id+"'";
+        await mySqlCon.query(sql, async function (err, result, fields) {
+            if (err) throw new Error(err);
+            if(stringJson(result).length){
+                return res.send({data : {msg : messages[7], status : stringJson(result)}, status : "success"})
+            }else{
+                return res.send({data : {msg : messages[8]}, status : "success"})
+            }
+        })
+    })
+});
 
 const port = 8080;
 app.listen(port, () => console.log(`App running on port http://localhost:${port}${base_url}/`));

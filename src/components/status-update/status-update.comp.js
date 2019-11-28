@@ -23,13 +23,23 @@ class SignUp extends React.Component{
         }
     }
 
+    componentWillMount(){
+        this.setState({
+            ...this.state,
+            ...{
+                userEmail : this.props.HOME_STATE.userDetails.email_id,
+                session_hash : this.props.HOME_STATE.userDetails.session_hash
+            }
+        })
+    }
+
     
     render(){
 
         const updateStatus = (event) =>{
             event.preventDefault();
             console.log("state is ", this.state);
-            fetchData(2, 1, this.state);
+            fetchData(7, 1, this.state);
         }  
 
         return(
@@ -40,7 +50,7 @@ class SignUp extends React.Component{
                             required
                             disabled={true}
                             label="Email"
-                            value={this.props.HOME_STATE.userDetails.email_id}
+                            value={this.state.userEmail}
                             {...textFieldOptions.marginNormal_variantOutlined_FW}
                         />
                         <DatePicker

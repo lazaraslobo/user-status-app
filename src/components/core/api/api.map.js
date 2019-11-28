@@ -6,5 +6,7 @@ export default {
     3       :     base_url + "/updateUser",
     4       :     base_url + "/validateHash",
     5       :     base_url + "/verifyHash",
-    6       :     base_url + "/getUserDetails"
+    6       :     base_url + "/getUserDetails",
+    7       :     base_url + "/addNewStatus",
+    8       :     base_url + "/getStatus"
 }
