@@ -12,32 +12,23 @@ import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
 
 class ViewStatusComponent extends React.Component{
+    constructor(){
+        super();
+        this.state = {
+            userStatus  :   []
+        }
+    }
+
     componentWillMount(){
         let isValidHash = checkSession(this.props);
         console.log("is valid hash ", isValidHash);
         fetchData(8, 1, this.props.HOME_STATE.userDetails).then(result =>{
+            this.setState({...this.state, ...{userStatus : result.data.status}})
             console.log("result ", result);
         })
     }
 
     render(){
-        // if(!this.props.HOME_STATE.isUserLoggedIn){
-        //     this.props.history.push("/login");
-        //     return false;
-        // }
-        const arr= [{date : "22-23-44", summary : "i worked on boot strap"},
-        {date : "2-23-4", summary : "i worked on material"},
-        {date : "23-10-1995", summary : "i worked on js"}]
-        const createTableData = () =>{
-            return arr.map((value, index)=>
-                <tr key={index}>
-                    <td>{index+1}</td>
-                    <td>{value.date}</td>
-                    <td>{value.summary}</td>
-                </tr>
-            )
-        }
-
         const goToRoute = (routeName) =>{
             this.props.history.push(routeName);
             return;
@@ -66,7 +57,15 @@ class ViewStatusComponent extends React.Component{
                                 </tr>
                             </thead>
                             <tbody>
-                                {createTableData()}
+                                {
+                                    this.state.userStatus.map((value, index)=>
+                                        <tr key={index}>
+                                            <td>{index+1}</td>
+                                            <td>{value.date}</td>
+                                            <td>{value.summary}</td>
+                                        </tr>
+                                    )
+                                }
                             </tbody>
                         </table>
                     </Grid>
