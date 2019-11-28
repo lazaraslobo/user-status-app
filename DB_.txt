@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 26, 2019 at 09:03 PM
+-- Generation Time: Nov 28, 2019 at 12:19 PM
 -- Server version: 5.1.36
 -- PHP Version: 5.3.0
 
@@ -16,23 +16,26 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users_tbl`
+-- Table structure for table `status_tbl`
 --
 
-CREATE TABLE IF NOT EXISTS `users_tbl` (
+CREATE TABLE IF NOT EXISTS `status_tbl` (
+  `status_id` int(11) NOT NULL AUTO_INCREMENT,
   `email_id` varchar(64) NOT NULL,
-  `first_name` varchar(64) NOT NULL,
-  `last_name` varchar(64) NOT NULL,
-  `password` varchar(64) NOT NULL,
-  `phone` bigint(20) NOT NULL,
-  `session_hash` varchar(128) NOT NULL,
-  PRIMARY KEY (`email_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `date` varchar(64) NOT NULL,
+  `summary` varchar(256) NOT NULL,
+  PRIMARY KEY (`status_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
--- Dumping data for table `users_tbl`
+-- Dumping data for table `status_tbl`
 --
 
-INSERT INTO `users_tbl` (`email_id`, `first_name`, `last_name`, `password`, `phone`, `session_hash`) VALUES
-('Company Inc', 'Highway 37', 'Highway 37', 'Highway 37', 8098988909, 'hdfjkhfg7897dfgmh'),
-('lobo@gmail.com', 'Highway 37', 'Highway 37', 'Highway 37', 8098988909, 'hdfjkhfg7897dfgmh');
+INSERT INTO `status_tbl` (`status_id`, `email_id`, `date`, `summary`) VALUES
+(1, 'lobo@lobo.com', '2019-11-28', 'dgdgfdhg'),
+(2, 'lobo@lobo.com', '2019-11-28', 'dgdgfdhg'),
+(3, 'lobo@lobo.com', '2019-11-28', 'dgdgfdhg'),
+(4, 'lobo@lobo.com', '2019-11-28', 'i worked on bootstrap'),
+(5, 'sourabh@gmail.com', '2019-11-28', 'ok i dont know'),
+(6, 'lobo@lobo.com', '2019-11-28', 'ok'),
+(7, 'prasad3737@gmail.com', '2019-11-28', 'i worked on the button of bootstrap');
