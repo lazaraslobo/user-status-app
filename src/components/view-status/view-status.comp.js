@@ -23,7 +23,7 @@ class ViewStatusComponent extends React.Component{
         let isValidHash = checkSession(this.props);
         console.log("is valid hash ", isValidHash);
         fetchData(8, 1, this.props.HOME_STATE.userDetails).then(result =>{
-            this.setState({...this.state, ...{userStatus : result.data.status}})
+            this.setState({...this.state, ...{userStatus : result.data.status.length ? result.data.status : []}})
             console.log("result ", result);
         })
     }
@@ -45,6 +45,9 @@ class ViewStatusComponent extends React.Component{
                             <Grid item xs={2} onClick={()=>goToRoute("/edit-profile")}>
                                 <i>Edit Profile</i>
                             </Grid>
+                            <Grid item xs={2} onClick={()=>goToRoute("/")}>
+                                <i>Home</i>
+                            </Grid>
                         </Grid>
                     </Header>
                     <Grid {...GridOptions.contRowCenterCenter} item xs={10}>
@@ -58,13 +61,18 @@ class ViewStatusComponent extends React.Component{
                             </thead>
                             <tbody>
                                 {
-                                    this.state.userStatus.map((value, index)=>
-                                        <tr key={index}>
-                                            <td>{index+1}</td>
-                                            <td>{value.date}</td>
-                                            <td>{value.summary}</td>
+                                    !this.state.userStatus.length 
+                                    ?
+                                        <tr>
+                                            <td colSpan="3"><h4>No status found</h4></td>
                                         </tr>
-                                    )
+                                    :
+                                        this.state.userStatus.map((value, index)=>
+                                            <tr key={index}>
+                                                <td>{index+1}</td>
+                                                <td>{value.date}</td>
+                                                <td>{value.summary}</td>
+                                            </tr>)
                                 }
                             </tbody>
                         </table>

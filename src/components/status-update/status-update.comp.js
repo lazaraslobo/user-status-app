@@ -13,6 +13,10 @@ import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
 import DatePicker from '../common/date-picker.common';
 
+import {ToastsStore} from 'react-toasts';
+import ShowToast from '../common/toast.msg';
+import toastsMsg from '../common/maps/toast-msg.map';
+
 class SignUp extends React.Component{
     constructor(){
         super();
@@ -39,7 +43,9 @@ class SignUp extends React.Component{
         const updateStatus = (event) =>{
             event.preventDefault();
             console.log("state is ", this.state);
-            fetchData(7, 1, this.state);
+            fetchData(7, 1, this.state).then(result =>{
+                ToastsStore.success(toastsMsg[3]);
+            });
         }  
 
         return(
@@ -65,6 +71,7 @@ class SignUp extends React.Component{
                         />
                         <Button {...buttonOptions.Contained_FW_Primary} type="submit">submit</Button>
                     </form>
+                    <ShowToast store={ToastsStore}/>
                 </Grid>
             </Grid>
         )

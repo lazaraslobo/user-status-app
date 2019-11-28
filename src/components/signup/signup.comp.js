@@ -12,6 +12,10 @@ import TextField, {textFieldOptions} from '../common/textfield.common';
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
 
+import {ToastsStore} from 'react-toasts';
+import ShowToast from '../common/toast.msg';
+import toastsMsg from '../common/maps/toast-msg.map';
+
 class SignUp extends React.Component{
     constructor(){
         super();
@@ -32,6 +36,14 @@ class SignUp extends React.Component{
             console.log("state is ", this.state);
             let signUpResp_API = fetchData(2, 1, this.state).then(resp =>{
                 console.log("signUp response ", resp);
+                if(resp.data.isProfileCreated){
+                    ToastsStore.success(toastsMsg[4]);
+                    setTimeout(()=>{
+                        this.props.history.push("/login");
+                    }, 2000)
+                }else{
+                    ToastsStore.error(toastsMsg[5]);
+                }
                 return resp;
             });
         }
@@ -98,6 +110,7 @@ class SignUp extends React.Component{
                             </form>
                         </Grid>
                     </Grid>
+                    <ShowToast store={ToastsStore}/>
                 </Grid>
             </Grid>
         )

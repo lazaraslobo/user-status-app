@@ -75,9 +75,7 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
 
             await mySqlCon.query(sql, async function (err, result, fields) {
                 if (err) throw new Error(err);
-                console.log("user creation resp =>  ", result);
-                res.status(200);
-                return res.send({data : {msg : "User Created Successfully!", status : "success"}})
+                return res.send({data : {msg : "User Created Successfully!", isProfileCreated : true, status : "success"}})
             })
         }
 
@@ -85,7 +83,8 @@ app.post(base_url+'/addNewUser', asyncMiddleware(async (req, res) =>{
 }));
 
 app.post(base_url+'/updateUser', async function (req, res) {
-    let updateQuery = "UPDATE users_tbl SET `password` = '"+req.body.userPassword+"', `first_name` = '"+req.body.firstName+"', `last_name` = '"+req.body.lastName+"', `phone`='"+req.body.phone+"' WHERE `email_id` = '"+req.body.userEmail+"' AND `session_hash`='"+req.body.session_hash+"'";
+    let pass = req.body.userPassword ? "`password` = '"+req.body.userPassword+"'," : "";
+    let updateQuery = "UPDATE users_tbl SET "+pass+" `first_name` = '"+req.body.firstName+"', `last_name` = '"+req.body.lastName+"', `phone`='"+req.body.phone+"' WHERE `email_id` = '"+req.body.userEmail+"' AND `session_hash`='"+req.body.session_hash+"'";
     await mySqlCon.query(updateQuery, async function (err, result, fields) {
         if (err) throw new Error(err);
         let response = stringJson(result);
@@ -114,15 +113,15 @@ app.post(base_url+'/addNewStatus', async function (req, res) {
     await mySqlCon.query(sql, async function (err, result, fields) {
         if (err) throw new Error(err);
         if(!stringJson(result).length){
-            return res.send({data : {msg : messages[2]}, status : "success"})
+            return res.send({data : {msg : messages[2]}, isAccCreated : false, status : "success"})
         }
         let sql = "INSERT INTO status_tbl (email_id, date, summary) VALUES ('"+req.body.userEmail+"', '"+req.body.summaryDate+"', '"+req.body.userSummary+"')";
         await mySqlCon.query(sql, async function (err, result, fields) {
             if (err) throw new Error(err);
             if(stringJson(result)){
-                return res.send({data : {msg : messages[5]}, status : "success"});
+                return res.send({data : {msg : messages[5], isAccCreated : true}, status : "success"});
             }else{
-                return res.send({data : {msg : messages[6]}, status : "failed"});
+                return res.send({data : {msg : messages[6], isAccCreated : false}, status : "failed"});
             }
         });
     });
@@ -142,7 +141,7 @@ app.post(base_url+'/getStatus', async function (req, res) {
             if(stringJson(result).length){
                 return res.send({data : {msg : messages[7], status : stringJson(result)}, status : "success"})
             }else{
-                return res.send({data : {msg : messages[8]}, status : "success"})
+                return res.send({data : {msg : messages[8], status : []}, status : "success"})
             }
         })
     })

@@ -14,6 +14,9 @@ import TextField, {textFieldOptions} from '../common/textfield.common';
 import fetchData from '../core/api/api.service';
 import Header from '../common/header.common';
 import {getLocalStorage} from '../utilities/local-storage.util';
+import {ToastsStore} from 'react-toasts';
+import ShowToast from '../common/toast.msg';
+import toastsMsg from '../common/maps/toast-msg.map';
 
 class SignUp extends React.Component{
     constructor(){
@@ -60,7 +63,7 @@ class SignUp extends React.Component{
             event.preventDefault();
             console.log("state is ", this.state);
             fetchData(3, 1, this.state).then(result =>{
-
+                ToastsStore.success(toastsMsg[2]);
             });
         }
 
@@ -70,11 +73,14 @@ class SignUp extends React.Component{
                     <Grid {...GridOptions.contRowCenterCenter} item xs={12} className="common-header">
                         <Header title="Edit Profile">
                             <Grid {...GridOptions.contRowCenterCenter} item xs={12} >
-                                <Grid item {...GridOptions.contRowCenterCenter} xs={2}>
-                                    <i onClick={()=>this.props.history.push("/login")}>Logout</i>
+                                <Grid item xs={2} onClick={()=>this.props.history.push("/view-status")}>
+                                    <i>View Status</i>
                                 </Grid>
                                 <Grid item {...GridOptions.contRowCenterCenter} xs={2}>
                                     <i onClick={()=>this.props.history.push("/")}>Home</i>
+                                </Grid>
+                                <Grid item {...GridOptions.contRowCenterCenter} xs={2}>
+                                    <i onClick={()=>this.props.history.push("/login")}>Logout</i>
                                 </Grid>
                             </Grid>
                         </Header>
@@ -117,7 +123,6 @@ class SignUp extends React.Component{
                                     onChange={ev=> this.setState({...this.state, ...{'phone' : ev.target.value}})}
                                 />
                                 <TextField
-                                    required
                                     id="userPassword"
                                     label="Password"
                                     type="password"
@@ -127,6 +132,7 @@ class SignUp extends React.Component{
                                 <Button {...buttonOptions.Contained_FW_Primary} type="submit">Update</Button>
                             </form>
                         </Grid>
+                        <ShowToast store={ToastsStore}/>
                     </Grid>
                 </Grid>
             </Grid>

@@ -14,6 +14,10 @@ import Header from '../common/header.common';
 
 import {setLocalStorageData, cleanAll} from '../utilities/local-storage.util';
 
+import {ToastsStore} from 'react-toasts';
+import ShowToast from '../common/toast.msg';
+import toastsMsg from '../common/maps/toast-msg.map';
+
 class HomeModule extends React.Component{
     constructor(){
         super();
@@ -35,9 +39,11 @@ class HomeModule extends React.Component{
                     setLocalStorageData(result.data);
                     this.props.updateUserDetails(result.data);
                     console.log(this.props.HOME_STATE);
+                    ToastsStore.success(toastsMsg[1]);
                     this.props.history.push("/");
                     return;
                 }else{
+                    ToastsStore.success(result.data.msg);
                     cleanAll();
                 }
             });
@@ -74,13 +80,14 @@ class HomeModule extends React.Component{
                                     label="Password"
                                     {...textFieldOptions.marginNormal_variantOutlined_FW}
                                     onKeyUp={(ev)=> handleInputs(ev, 'userPassword')}
-
+                                    type="password"
                                 />
                                 <Button {...buttonOptions.Contained_FW_Primary} type="submit">Login</Button>
                             </form>
                         </Grid>
                     </Grid>
                 </Grid>
+                <ShowToast store={ToastsStore}/>
             </Grid>
         )
     }
